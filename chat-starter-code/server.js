@@ -43,7 +43,10 @@ wsServer.on("connection", (socket) => {
     console.log(data);
     //socket.send(data);
     wsServer.clients.forEach((connectedSocket) => {
-      if (socket !== connectedSocket) {
+      if (
+        connectedSocket.readyState === WebSocket.OPEN &&
+        socket !== connectedSocket
+      ) {
         connectedSocket.send(data);
       }
     });
