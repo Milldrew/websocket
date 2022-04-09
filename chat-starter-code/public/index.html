@@ -72,8 +72,12 @@
 
         // TODO:
         // Exercise 5: Respond to connections by defining the .onopen event handler.
-        wsClient.onopen = () => {
+        wsClient.onopen = (socket) => {
           console.log("client connected");
+        };
+        wsClient.onmessage = (messageEvent) => {
+          let message = messageEvent.data;
+          showMessageReceived(message);
         };
 
         // TODO:
@@ -142,7 +146,6 @@
         messages.appendChild(messageNode);
         messages.scrollTop = messages.scrollHeight;
       }
-
       // Start the WebSocket server
       init();
     </script>
